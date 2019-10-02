@@ -1,0 +1,16 @@
+{
+  "name": "preparation",
+  "version": "1.0.0",
+  "description": "test of the week",
+  "main": "collection.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Elias Jr",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "fs": "0.0.1-security",
+    "mocha": "^3.5.0"
+  }
+}

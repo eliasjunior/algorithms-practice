@@ -1,0 +1,25 @@
+{
+  "name": "strings",
+  "jest": {
+    "verbose": true,
+    "moduleDirectories": ["./"]
+  },
+  "transform": {
+    "^.+\\.jsx$": "babel-jest",
+    "^.+\\.js$": "babel-jest"
+    },
+  "version": "1.0.0",
+  "description": "",
+  "main": "reverseWords.v2.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-jest": "^23.6.0",
+    "jest": "^23.6.0",
+    "regenerator-runtime": "^0.13.1"
+  },
+  "devDependencies": {}
+}

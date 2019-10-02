@@ -1,0 +1,27 @@
+<div class="content">
+    <div class="ui-screen">
+        <div ng-controller="FormViewController as formViewCtrl">
+            <h1 class="screen-title">
+                <span>Form View</span>
+                <help-button helpId="0000"></help-button>
+                <feedback pagName="Template"></feedback>
+            </h1>
+            <div class="formViewPurgeDate" ng-hide="formViewCtrl.retainUntilDate == false">Purge Date: {{formViewCtrl.retainUntilDate|date:"dd-MM-yyyy"}}</div>
+            <a type="button" class="btn btn-default formViewButton" href="storeFront#/forms">Return</a>
+            <div class="formViewTable">
+                <div class="formViewHeader">
+                    <span style="width: 20%;" class="formViewField" ng-click="formViewCtrl.sorter = 'beneficiary.fullName'; formViewCtrl.reverse = !formViewCtrl.reverse; formViewCtrl.setArrow(formViewCtrl.reverse, -2)" >Beneficiary Name &nbsp;<i ng-class="formViewCtrl.beneficiaryNameArrow"></i></span>
+                    <span style="width: 15%;" class="formViewField" ng-click="formViewCtrl.sorter = 'retainUntilDate'; formViewCtrl.reverse = !formViewCtrl.reverse; formViewCtrl.setArrow(formViewCtrl.reverse, -1)" ng-show="formViewCtrl.retainUntilDate == false">Data Purge Date &nbsp;<i ng-class="formViewCtrl.dataPurgeDateArrow"></i></span>
+                    <span style="width: 15%;" class="formViewField" ng-click="formViewCtrl.toggleSort($index);" ng-repeat="formElement in formViewCtrl.submissions[0].formElementValues" ng-hide="formElement.formElementType == 'Paragraph' || formElement.formElementType == 'Signature'">{{formElement.formElementLabel}} &nbsp;<i ng-class="formElement.sortArrow"></i></span>
+                </div>
+                <ul ng-repeat="submission in formViewCtrl.submissions|orderBy:formViewCtrl.sorter:formViewCtrl.reverse" >
+                    <li class="formViewRow">
+                        <span style="width: 20%" class="formViewField">{{submission.beneficiary.fullName}}</span>
+                        <span style="width: 15%" class="formViewField" ng-show="formViewCtrl.retainUntilDate == false">{{submission.retainUntilDate|date:"dd-MM-yyyy"}}</span>
+                        <span style="width: 15%" class="formViewField" ng-repeat="formElement in submission.formElementValues" ng-hide="formElement.formElementType == 'Paragraph' || formElement.formElementType == 'Signature'">{{formElement.formElementValue}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

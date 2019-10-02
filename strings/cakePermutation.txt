@@ -1,0 +1,30 @@
+function getPermutations(string) {
+
+    
+    // base case
+    if (string.length <= 1) {
+        return new Set(string);
+    }
+
+    var allCharsExceptLast = string.slice(0, -1);
+    var lastChar = string[string.length - 1];
+	console.log('fucking tired this shit', allCharsExceptLast)
+    // recursive call: get all possible permutations for all chars except last
+    var permutationsOfAllCharsExceptLast = getPermutations(allCharsExceptLast);
+	console.log('** going to loop the fuck', permutationsOfAllCharsExceptLast)
+    // put the last char in all possible positions for each of the above permutations
+    var permutations = new Set();
+    permutationsOfAllCharsExceptLast.forEach(function(permutationOfAllCharsExceptLast) {
+    	console.log('Inside loop ', permutationOfAllCharsExceptLast)
+        for (var position = 0; position <= allCharsExceptLast.length; position++) {
+            var permutation = permutationOfAllCharsExceptLast.slice(0, position) + lastChar + permutationOfAllCharsExceptLast.slice(position);
+            permutations.add(permutation);
+        }
+    });
+
+    return permutations;
+}
+
+const r = getPermutations(process.argv.slice(2)[0])
+
+console.log('=>', r)

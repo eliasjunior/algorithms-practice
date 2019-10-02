@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<style type="text/css">
+			body {
+				margin: 10px
+			}
+			.table-result {
+				display: grid;
+				grid-template-columns: 200px 100px;
+				grid-template-rows: 50px 50px;
+				grid-gap: 10px;
+				background-color: #fff;
+				color: #aaa
+			}
+
+			.box {
+				background-color: #444;
+				color: #fff;
+				border-radius: 5px;
+				padding: 5px;
+				font-size: 150%;
+			}
+		</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	</head>
+	<body>
+		<ul>
+			<li> child
+				<ul>
+					<li> gran child
+						<ul>
+							<li></li>
+						</ul>
+					</li>
+					<li>
+						<ul>
+							<li>
+								<ul></ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li></li>
+		</ul>
+		<script>
+
+			function nodeFactory () {
+				let level = 0;
+				let max = 0;
+				return {
+					findDeep: function (nodeList, level)  {
+						for(let i = 0; i < nodeList.length; i++) {
+							let current = nodeList[i];
+							if((current.nodeName === 'UL' || current.nodeName === 'LI') && 
+							 	current.childNodes.length > 0) {
+								max = Math.max(max, level)
+								this.findDeep(current.childNodes, level++)
+							} else {
+								//level =
+							}
+						}
+
+						console.log('I think this is the end', level)
+					}
+				}
+			}
+
+			nodeFactory().findDeep(document.querySelector('ul').childNodes, 0)
+			
+		</script>
+	</body>
+</html>
