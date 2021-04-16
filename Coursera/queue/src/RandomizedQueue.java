@@ -7,18 +7,15 @@ import java.util.NoSuchElementException;
 public class RandomizedQueue<Item> implements Iterable<Item> {
     private int n;
     private Item[] queue;
-    private int floor;
-    private int ceil;
-    private int nullCount;
+    private int first;
+    private int last;
     private static final int INIT_CAPACITY = 8;
 
     // construct an empty randomized queue
     public RandomizedQueue() {
         queue = (Item[]) new Object[INIT_CAPACITY];
-        //queue = new Item[INIT_CAPACITY];
-        floor = 0;
-        ceil = 0;
-        nullCount = 0;
+        first = 0;
+        last = 0;
     }
 
     // is the randomized queue empty?
@@ -38,70 +35,31 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         if (n == queue.length) {
             resize(queue.length * 2);
         }
-        // queue[n++] = (int) item;
-        queue[n++] = item;
-        ceil++;
-    }
-    //TODO
-    // create 2 pointer floor and ceiling
-    // get a new random
-    // divide the array by new random pos
-    // move the pointer to the bigger halve
-    // pos > middle move floor otherwise move ceil
-    // reset the pointer
-    // once both pointer meet, copy to a new array
+        queue[last++] = item;
+        if (last == queue.length) {
+            last = 0;
+        }
 
+        n++;
+    }
 
     // remove and return a random item
     public Item dequeue() {
         if (isEmpty()) {
             throw new NoSuchElementException();
         }
-//        for (int i = 0; i < queue.length; i++) {
-//            StdOut.print(queue[i] +", ");
-//        }
-        Item res;
+        Item res = queue[first];
         //if has more then 2 items
-        if (n > 1 && floor < ceil) {
-            int pos = StdRandom.uniform(floor, ceil);
-
-//            if (pos == first) {
-//                first++;
-//            }
-            int diffUp = java.lang.Math.abs(pos - ceil);
-            int diffDown = java.lang.Math.abs(pos - floor);
-            if (diffUp > diffDown) {
-                floor = pos + 1;
-            } else {
-                ceil = pos - 1;
-            }
-
-            res = queue[pos];
-            queue[pos] = null;
-            nullCount++;
-//            if(res == null) {
-//                while(queue[floor] == null) {
-//                    floor++;
-//                }
-//                res = queue[floor];
-//            } else {
-//                queue[pos] = null;
-//            }
-
-        } else {
-            res = queue[floor];
-            queue[floor] = null;
-            nullCount++;
-        }
+        queue[first] = null;
+        first++;
+        if (first == queue.length) first = 0;
         n--;
 
-        if (ceil - 1 == floor) {
-            resize(queue.length - nullCount);
+        if (n > 0 && n == queue.length/4) {
+            resize(queue.length/2);
+            StdRandom.shuffle(queue, first, last - 1);
         }
-//        StdOut.println(" ---- removed " + res);
-//        if(res == null) {
-//            System.err.println("null bug");
-//        }
+
         return res;
     }
 
@@ -110,9 +68,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         if (isEmpty()) {
             throw new NoSuchElementException();
         }
-        int pos = StdRandom.uniform(n);
-        //  Integer res = queue[pos];
-        return queue[pos];
+        return queue[first];
     }
 
     // return an independent iterator over items in random order
@@ -121,7 +77,13 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     private class JuninhoIterator implements Iterator {
-        private int current = floor;
+        private int current = 0;
+
+        JuninhoIterator() {
+            if(last - 1 > first) {
+                StdRandom.shuffle(queue, first, last - 1);
+            }
+        }
 
         @Override
         public boolean hasNext() {
@@ -133,8 +95,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
-            // Integer res = queue[current++];
-            return queue[current++];
+            Item item = queue[(current + first) % queue.length];
+            current++;
+            return item;
         }
 
         public void remove() {
@@ -145,14 +108,13 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     // unit testing (required)
     public static void main(String[] args) {
         RandomizedQueue<Integer> r = new RandomizedQueue<>();
-         for (int i = 0; i < 10; i++) {
-//        assert r.test_dequeueEnqueue();
-//        assert r.test_dequeueEnqueue2();
-//        assert r.test_dequeueEnqueue3();
-        assert r.test_dequeueEnqueue4(r);
-        //   assert r.test_iterator();
-          }
-
+         for (int i = 0; i < 1; i++) {
+            assert r.test_dequeueEnqueue();
+            assert r.test_dequeueEnqueue2();
+            assert r.test_dequeueEnqueue3();
+            assert r.test_dequeueEnqueue4(r);
+            assert r.test_iterator();
+         }
 
     }
 
@@ -249,19 +211,13 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     private void resize(int capacity) {
-        //int [] copy = new int[capacity];
         Item[] copy = (Item[]) new Object[capacity];
-      //  Item[] temp= (Item[]) new Object[queue.length];
-        int j = 0;
-        for (int i = 0; i < queue.length; i++) {
-            if(queue[i] != null) {
-                copy[j++] = queue[i];
-            }
+        for (int i = 0; i < n; i++) {
+            copy[i] = queue[(first + i) % queue.length];
         }
         queue = copy;
-        floor = 0;
-        ceil = n - 1;
-        nullCount = 0;
-       // first = 0;
+
+        first = 0;
+        last = n;
     }
 }
