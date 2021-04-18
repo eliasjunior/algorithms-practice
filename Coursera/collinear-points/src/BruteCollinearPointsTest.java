@@ -1,11 +1,8 @@
-import edu.princeton.cs.algs4.In;
-import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.StdOut;
 import org.junit.jupiter.api.Test;
 
-import java.util.Scanner;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class BruteCollinearPointsTest {
 
@@ -69,7 +66,7 @@ class BruteCollinearPointsTest {
     public void testBruteIndexFiles() {
         Point[] points = UtilCoursera.getPoints("input6.txt");
         BruteCollinearPoints brute = new BruteCollinearPoints(points);
-       // UtilCoursera.print(points, brute.segments());
+        // UtilCoursera.print(points, brute.segments());
         assertEquals(1, brute.numberOfSegments());
     }
 
@@ -77,6 +74,7 @@ class BruteCollinearPointsTest {
     public void testBruteIndex8() {
         Point[] points = UtilCoursera.getPoints("input8.txt");
         BruteCollinearPoints brute = new BruteCollinearPoints(points);
+
         for (LineSegment segment : brute.segments()) {
             StdOut.println(segment);
         }
@@ -84,19 +82,19 @@ class BruteCollinearPointsTest {
     }
 
     @Test
-    public void testBruteIndex() {
-        {
-            Point[] points = UtilCoursera.getPoints("input9.txt");
-            BruteCollinearPoints brute = new BruteCollinearPoints(points);
-            assertEquals(1, brute.numberOfSegments());
-        }
+    public void testBruteIndex9() {
+        Point[] points = UtilCoursera.getPoints("input9.txt");
+        BruteCollinearPoints brute = new BruteCollinearPoints(points);
+        assertEquals(1, brute.numberOfSegments());
 
-        {
-            Point[] points = UtilCoursera.getPoints("input10.txt");
-            BruteCollinearPoints brute = new BruteCollinearPoints(points);
-           // print(points, brute.segments());
-            assertEquals(2, brute.numberOfSegments());
-        }
+    }
+
+    @Test
+    public void testBruteIndex10() {
+        Point[] points = UtilCoursera.getPoints("input10.txt");
+        BruteCollinearPoints brute = new BruteCollinearPoints(points);
+        // print(points, brute.segments());
+        assertEquals(2, brute.numberOfSegments());
     }
 
     @Test
@@ -104,7 +102,7 @@ class BruteCollinearPointsTest {
         {
             Point[] points = UtilCoursera.getPoints("input20.txt");
             BruteCollinearPoints brute = new BruteCollinearPoints(points);
-         //   UtilCoursera.print(points, brute.segments());
+            //   UtilCoursera.print(points, brute.segments());
             assertEquals(5, brute.numberOfSegments());
         }
     }
@@ -115,8 +113,16 @@ class BruteCollinearPointsTest {
             Point[] points = UtilCoursera.getPoints("input40.txt");
             BruteCollinearPoints brute = new BruteCollinearPoints(points);
             //   UtilCoursera.print(points, brute.segments());
-            assertEquals(4, brute.numberOfSegments());
+            assertEquals(5, brute.numberOfSegments());
         }
+    }
+
+    @Test
+    public void testHorizontal5() {
+        Point[] points = UtilCoursera.getPoints("horizontal5.txt");
+        BruteCollinearPoints brute = new BruteCollinearPoints(points);
+        //   UtilCoursera.print(points, brute.segments());
+        assertEquals(5, brute.numberOfSegments());
     }
 
 }

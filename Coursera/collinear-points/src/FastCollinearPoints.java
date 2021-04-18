@@ -3,11 +3,16 @@ import java.util.Arrays;
 public class FastCollinearPoints {
     private LineSegment[] segments;
     private int count = 0;
-    private int countCollinear = 4;
-    private Point[] points;
+    private int countCollinear = 2;
+    private Point[] iPoints = new Point[5];
+    private Point[] ePoints = new Point[5];
+    private Point end;
+    private Point init;
+    private Point  [] points;
 
     public FastCollinearPoints(Point[] points) {
         validateInput(points);
+        // just for print
         this.points = points;
         segments = new LineSegment[points.length];
 
@@ -16,62 +21,110 @@ public class FastCollinearPoints {
             aux[i] = points[i];
         }
 
-        for (int i = 0; i < points.length; i++) {
+        Point next = null;
+        for (int i = 0; i < aux.length; i++) {
             Point origin = aux[i];
+            printHelper(" =============== ORIGIN", origin, 0);
             Arrays.sort(points, origin.slopeOrder());
-            Point q1 = points[1];
-            double slopeWithQ1 = origin.slopeTo(q1);
+            for (int j = 1; j < points.length; j++) {
+                countCollinear = 2;
+                Point q1 = points[j];
+                double slopeQ1 = origin.slopeTo(q1);
+                printHelper("q1", q1, slopeQ1);
+                if (j == points.length - 1) break;
+                Point q2 = points[++j];
+                double slopeQ2 = origin.slopeTo(q2);
+                printHelper("q2", q2, slopeQ2);
+                if (j == points.length - 1) break;
+                Point q3 = points[++j];
+                double slopeQ3 = origin.slopeTo(q3);
 
-            Point q2 = points[2];
-            Point q3 = points[3];
-            Point end = q3;
-
-            double slope2 = q2.slopeTo(q3);
-
-            if (slopeWithQ1 == slope2) {
-                i = i + 3;
-                Point adjacent = points[4];
-
-                double slopeAdjacent = adjacent.slopeTo(origin);
-
-                while (slopeWithQ1 == slopeAdjacent && i < points.length - 1) {
-                    end = adjacent;
-                    adjacent = points[i + 1];
-                    slopeAdjacent = adjacent.slopeTo(origin);
+                printHelper("q3", q3, slopeQ3);
+                if (slopeQ1 == slopeQ2 &&  slopeQ1 == slopeQ3) {
+                    checkRange(origin);
+                    checkRange(q1);
+                    checkRange(q2);
+                    checkRange(q3);
+                    //increment
                     countCollinear++;
-                    i++;
+                    if (j == points.length - 1) break;
+                    next = points[++j];
+                    double slopeNext = next.slopeTo(q3);
+                    // every next increment the jump and indexSearch
+                    while (slopeQ3 == slopeNext) {
+                        checkRange(next);
+                        printHelper("next", next, slopeNext);
+                        countCollinear++;
+                        if (j == points.length - 1) break;
+                        next = points[++j];
+                        slopeNext = next.slopeTo(q3);
+                    }
+                } else {
+//                    if (j == points.length - 1) break;
+//                    next = points[j + 1];
+//                    if (next.slopeTo(q3) == slopeQ3) {
+//                        --j;
+//                    }
                 }
-                addLine(origin, end);
+                if (countCollinear > 3) {
+                    // i have a collinear
+                    addLine();
+                }
             }
-
-//            if (countCollinear > 4) {
-//                boolean isAlreadyIn = false;
-////                for (LineSegment inSegment : segments()
-////                ) {
-////                    if (inSegment != null) {
-////                        // it has to be ascending order to work
-////                        Point[] inPoints = getPointFromStr(inSegment.toString());
-////                        Point inFirst = inPoints[0];
-////                        Point inLast = inPoints[1];
-////
-////                        if (inFirst.slopeTo(origin) == slopeWithQ1) {
-////                            isAlreadyIn = true;
-////                        }
-////                    }
-////                }
-//                // if(!isAlreadyIn) {
-//                addLine(origin, end);
-//                  UtilCoursera.print(points, segments());
-//                // }
-//            }
-            countCollinear = 2;
         }
     }    // finds all line segments containing 4 or more points
 
-    private void addLine(Point init, Point end) {
-        LineSegment lineSegment = new LineSegment(init, end);
-        segments[count++] = lineSegment;
-        //  UtilCoursera.print(points, segments());
+    private void checkRange(Point p) {
+        if (init == null) {
+            init = p;
+            end = p;
+        } else {
+            if (p.compareTo(init) == -1) {
+                init = p;
+            } else if (p.compareTo(end) == 1) {
+                end = p;
+            }
+        }
+
+    }
+
+    private void addLine() {
+        boolean found = false;
+        for (int k = 0; k < iPoints.length; k++) {
+            if (iPoints[k] != null &&
+                    iPoints[k].compareTo(init) == 0 &&
+                    ePoints[k].compareTo(end) == 0) {
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            printHelper("line");
+            if(init.compareTo(end) != 0) {
+                LineSegment lineSegment = new LineSegment(init, end);
+                //this condition shows that something is wrong, count should never be greats that the number of segments
+                // they should be created at same time
+                if (count < segments.length - 1) {
+                    segments[count] = lineSegment;
+                    count++;
+                    // temp
+                    if (count < iPoints.length - 1) {
+                        iPoints[count] = init;
+                        ePoints[count] = end;
+                    }
+                    UtilCoursera.print(points, segments());
+                }
+            }
+        }
+
+    }
+
+    private void printHelper(String label) {
+        System.out.println(label + " ======================== init" + init + " end " + end);
+    }
+
+    private void printHelper(String label, Point q, double slope) {
+        System.out.println("    ======================== " + q + " " + label + " =>" + slope);
     }
 
     public int numberOfSegments() {
@@ -109,19 +162,6 @@ public class FastCollinearPoints {
                 }
             }
         }
-    }
-
-    private Point[] getPointFromStr(String str) {
-        String[] stillStr = str.split("->");
-        Point p = getPoint(stillStr[0].trim().split(","));
-        Point q = getPoint(stillStr[1].trim().split(","));
-        return new Point[]{p, q};
-    }
-
-    private Point getPoint(String[] coor) {
-        String x = coor[0].trim().replaceAll("[()]", "");
-        String y = coor[1].trim().replaceAll("[()]", "");
-        return new Point(Integer.parseInt(x), Integer.parseInt(y));
     }
 
 }

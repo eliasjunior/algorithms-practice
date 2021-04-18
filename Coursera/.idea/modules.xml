@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Coursera.iml" filepath="$PROJECT_DIR$/Coursera.iml" />
+      <module fileurl="file://$PROJECT_DIR$/collinear-points/collinear-points.iml" filepath="$PROJECT_DIR$/collinear-points/collinear-points.iml" />
       <module fileurl="file://$PROJECT_DIR$/queue/queue.iml" filepath="$PROJECT_DIR$/queue/queue.iml" />
+      <module fileurl="file://$PROJECT_DIR$/utils/utils.iml" filepath="$PROJECT_DIR$/utils/utils.iml" />
     </modules>
   </component>
 </project>

@@ -68,6 +68,7 @@ class PointTest {
 
     }
 
+
     @Test
     public void testCompareTo() {
         Point p = new Point(1,1);
@@ -85,11 +86,84 @@ class PointTest {
 
     @Test
     public void testSlopeFromFiles() {
+        int count = 0;
+        int countCollinear = 2;
        // String file = UtilCoursera.readFile(basePath + "input6.txt");
-        Point [] points = UtilCoursera.getPoints( "input6.txt");
+        Point [] points = UtilCoursera.getPoints( "draft.txt");
+        Point[] aux = new Point[points.length];
+        for (int i = 0; i < points.length; i++) {
+            aux[i] = points[i];
+        }
+        double [] slopes = new double[5];
+        Point end;
+        Point init;
+        Point next = null;
+        for (int i = 0; i < aux.length; i++) {
+            Point origin  = aux[i];
+            init = origin;
+            System.out.println("ORIGIN ======================== " + origin);
+            Arrays.sort(points, origin.slopeOrder());
+            for (int j = 1; j < points.length; j++) {
+                Point q1 = points[j];
+                end = q1;
+                double slopeQ1 = origin.slopeTo(q1);
+                System.out.println("    ======================== " + q1 + " q1 slope " +slopeQ1);
+                if(j == points.length - 1) break;
+                Point q2 = points[++j];
+                double slopeQ2 = origin.slopeTo(q2);
+                if(slopeQ1 == slopeQ2) {
+                    //increment
+                    countCollinear++;
+                }
+                System.out.println("    ======================== " + q2 + " q2 slope " +slopeQ2);
+                if(j == points.length - 1) break;
+                Point q3 = points[++j];
+                double slopeQ3 = origin.slopeTo(q3);
+                System.out.println("    ======================== " + q3 + " q3 slope " +slopeQ3);
+                if(slopeQ2 == slopeQ3) {
+                    //increment
+                    countCollinear++;
+                    if(j == points.length - 1) break;
+                    next = points[++j];
+                    double slopeNext = next.slopeTo(q3);
+                    // every next increment the jump and indexSearch
+                    while(slopeQ3 == slopeNext) {
+                        if(next.compareTo(init) == -1) {
+                            init = next;
+                        } else if (next.compareTo(end) == 1) {
+                            end = next;
+                        }
+                        System.out.println("    ======================== " + next + " slopeNext " +slopeNext);
+                        countCollinear++;
+                        if(j == points.length - 1) break;
+                        next = points[++j];
+                        slopeNext = next.slopeTo(q3);
+                    }
+                    Point[] extra = {origin, q1, q2, q3, next, init, end};
+                    Arrays.sort(extra);
+                    init = extra[0];
+                    end = extra[extra.length -1];
+                }
+                if(countCollinear > 3){
+                    // i have a colinear
+                    //addLine(init, end)
+                    boolean found = false;
+                    for (int k = 0; k < slopes.length; k++) {
+                        if(slopes[k] == slopeQ3) {
+                            found = true;
+                        }
+                    }
+                    if(!found) {
+                        slopes[count] = slopeQ3;
+                        System.out.println("  LINE  ======================== init" + init + " end "+end );
+                    }
 
+                }
+                countCollinear = 2;
+            }
+
+        }
 
     }
-
 
 }
