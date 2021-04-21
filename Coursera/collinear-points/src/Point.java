@@ -60,9 +60,6 @@ public class Point implements Comparable<Point> {
      * @return the slope between this point and the specified point
      */
     public double slopeTo(Point that) {
-        if (that == null) {
-            throw new IllegalArgumentException();
-        }
         if (compareTo(that) == 0 ) {
             return Double.NEGATIVE_INFINITY;
         } else {
@@ -93,9 +90,6 @@ public class Point implements Comparable<Point> {
      *         argument point
      */
     public int compareTo(Point that) {
-        if (that == null) {
-            throw new IllegalArgumentException();
-        }
         if(this.y > that.y) {
             return 1;
         } else if(this.y < that.y) {
@@ -132,16 +126,9 @@ public class Point implements Comparable<Point> {
             } else {
                 return 0;
             }
-
-//            if(first == second) {
-//                return 0;
-//            } else if(first < second) {
-//                return -1;
-//            } else {
-//                return 1;
-//            }
         }
     }
+
 
     /**
      * Returns a string representation of this point.

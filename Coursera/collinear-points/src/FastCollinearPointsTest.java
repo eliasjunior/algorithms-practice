@@ -12,6 +12,7 @@ class FastCollinearPointsTest {
         Point[] points = UtilCoursera.getPoints("equidistant.txt");
         FastCollinearPoints fast = new FastCollinearPoints(points);
     }
+
     @Test
     public void testConstructor() {
         assertThrows(IllegalArgumentException.class, () -> {
@@ -31,16 +32,12 @@ class FastCollinearPointsTest {
     public void testIndex6() {
         Point[] points = UtilCoursera.getPoints("input6.txt");
         FastCollinearPoints fast = new FastCollinearPoints(points);
-        for (LineSegment segment : fast.segments()) {
-            StdOut.println(segment);
-        }
         assertEquals(1, fast.numberOfSegments());
         assertEquals(1, fast.segments().length);
     }
 
     @Test
     public void testIndex8() {
-        //TODO try with lesse data, only the slopeOrder, narrow down the parts you think does not work, test the methods isolated.
         Point[] points = UtilCoursera.getPoints("input8.txt");
         FastCollinearPoints fast = new FastCollinearPoints(points);
         assertEquals(2, fast.numberOfSegments());
@@ -49,48 +46,61 @@ class FastCollinearPointsTest {
 
     @Test
     public void testFastIndexes() {
-        {
-            Point[] points = UtilCoursera.getPoints("input9.txt");
-            FastCollinearPoints fast = new FastCollinearPoints(points);
-            assertEquals(1, fast.numberOfSegments());
-        }
+        Point[] points = UtilCoursera.getPoints("input9.txt");
+        FastCollinearPoints fast = new FastCollinearPoints(points);
+        assertEquals(1, fast.numberOfSegments());
     }
 
     @Test
     public void testFastInput10() {
-        {
-            Point[] points = UtilCoursera.getPoints("input10.txt");
-            FastCollinearPoints fast = new FastCollinearPoints(points);
-            assertEquals(2, fast.numberOfSegments());
-        }
+        Point[] points = UtilCoursera.getPoints("input10.txt");
+        FastCollinearPoints fast = new FastCollinearPoints(points);
+        assertEquals(2, fast.numberOfSegments());
     }
 
     @Test
     public void testFastIndex20() {
-        {
-            Point[] points = UtilCoursera.getPoints("input20.txt");
-            FastCollinearPoints fast = new FastCollinearPoints(points);
-            assertEquals(5, fast.numberOfSegments());
-        }
+        Point[] points = UtilCoursera.getPoints("input20.txt");
+        FastCollinearPoints fast = new FastCollinearPoints(points);
+        assertEquals(5, fast.numberOfSegments());
     }
 
     @Test
     public void testFastIndex40() {
-        {
-            Point[] points = UtilCoursera.getPoints("input40.txt");
-            FastCollinearPoints fast = new FastCollinearPoints(points);
-            assertEquals(4, fast.numberOfSegments());
-        }
+        Point[] points = UtilCoursera.getPoints("input40.txt");
+        FastCollinearPoints fast = new FastCollinearPoints(points);
+        assertEquals(4, fast.numberOfSegments());
+    }
+
+    @Test
+    public void testFastIndex200() {
+        Point[] points = UtilCoursera.getPoints("input200.txt");
+        FastCollinearPoints fast = new FastCollinearPoints(points);
+        assertEquals(4, fast.numberOfSegments());
     }
 
     @Test
     public void testFastInputHorinzontal() {
-        {
-            Point[] points = UtilCoursera.getPoints("horizontal5.txt");
-            FastCollinearPoints fast = new FastCollinearPoints(points);
-            assertEquals(5, fast.numberOfSegments());
+        // Point[] points = UtilCoursera.getPoints("horizontal5.txt");
+        Point[] points = UtilCoursera.getPoints("draft.txt");
+        FastCollinearPoints fast = new FastCollinearPoints(points);
+        assertEquals(5, fast.numberOfSegments());
 
-        }
+    }
+
+    @Test
+    public void testFastEquidistant() {
+        Point[] points = UtilCoursera.getPoints("equidistant.txt");
+        FastCollinearPoints fast = new FastCollinearPoints(points);
+        assertEquals(4, fast.numberOfSegments());
+    }
+
+    @Test
+    public void testFastGrids() {
+        //Point[] points = UtilCoursera.getPoints("input10000.txt");
+        Point[] points = UtilCoursera.getPoints("grid6x6.txt");
+        FastCollinearPoints fast = new FastCollinearPoints(points);
+        //assertEquals(4, fast.numberOfSegments());
     }
 
 }

@@ -63,7 +63,7 @@ class BruteCollinearPointsTest {
     }
 
     @Test
-    public void testBruteIndexFiles() {
+    public void testBruteInput6() {
         Point[] points = UtilCoursera.getPoints("input6.txt");
         BruteCollinearPoints brute = new BruteCollinearPoints(points);
         // UtilCoursera.print(points, brute.segments());
@@ -80,6 +80,7 @@ class BruteCollinearPointsTest {
         }
         assertEquals(2, brute.numberOfSegments());
     }
+
 
     @Test
     public void testBruteIndex9() {
