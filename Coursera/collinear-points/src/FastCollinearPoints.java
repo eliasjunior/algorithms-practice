@@ -11,7 +11,6 @@ public class FastCollinearPoints {
         // just for print
         //this.points = points;
         Point [] copy = copyPoints(points);
-        Point [] copy2 = copy;
 
         segments = new LineSegment[points.length];
 
