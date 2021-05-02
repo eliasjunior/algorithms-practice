@@ -3,9 +3,12 @@ import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.StdOut;
 
 public class UtilCoursera {
+    private static String basePath = "/Users/eliasjunior/Projects/algorithms-practice/Coursera";
+    private static String module_path_collinear = "/collinear-points/src/collinear/";
+    private static String module_path_puzzle = "/puzzle/";
     public static Point[] getPoints(String path) {
-        String basePath = "/Users/eliasjunior/Projects/algorithms-practice/Coursera/collinear-points/src/collinear/";
-        In file = new In(basePath + path);
+
+        In file = new In(basePath + module_path_collinear + path);
         int n = file.readInt();
         Point[] points = new Point[n];
         for (int i = 0; i < n; i++) {
@@ -16,6 +19,18 @@ public class UtilCoursera {
         return points;
     }
 
+    public static int[][] getBoard(String path) {
+        In file = new In(basePath + module_path_puzzle + path);
+        int n = file.readInt();
+        int [][] tiles = new int[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                int num = file.readInt();
+                tiles[i][j] = num;
+            }
+        }
+        return tiles;
+    }
 
     public static void print(Point[] points, LineSegment[] segments) {
         // draw the points
