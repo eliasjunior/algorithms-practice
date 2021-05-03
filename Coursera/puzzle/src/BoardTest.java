@@ -159,37 +159,37 @@ class BoardTest {
 
         assertFalse(board1.equals(board2));
     }
-    @Test
-    public void testConvert() {
-        Board board2 = new Board(getBoard("puzzle3x3-00.txt"));
-        assertEquals(3, board2.convert2dTo1d(1, 2));
-        assertEquals(2, board2.convert2dTo1d(1, 1));
-
-        assertEquals(4, board2.convert2dTo1d(2, 0));
-        assertEquals(5, board2.convert2dTo1d(2, 1));
-
-        assertEquals(9, board2.convert2dTo1d(3, 2));
-        assertEquals(8, board2.convert2dTo1d(3, 1));
-
-        Board board3 = new Board(getBoard("puzzle4x4-00.txt"));
-
-        assertEquals(1, board3.convert2dTo1d(1, 0));
-        assertEquals(4, board3.convert2dTo1d(1, 3));
-
-        assertEquals(9, board3.convert2dTo1d(3, 0));
-        assertEquals(12, board3.convert2dTo1d(3, 3));
-
-        assertEquals(5, board3.convert2dTo1d(2, 0));
-        assertEquals(6, board3.convert2dTo1d(2, 1));
-        assertEquals(7, board3.convert2dTo1d(2, 2));
-        assertEquals(8, board3.convert2dTo1d(2, 3));
-
-
-        assertEquals(13, board3.convert2dTo1d(4, 0));
-        assertEquals(14, board3.convert2dTo1d(4, 1));
-        assertEquals(15, board3.convert2dTo1d(4, 2));
-        assertEquals(16, board3.convert2dTo1d(4, 3));
-    }
+//    @Test
+//    public void testConvert() {
+//        Board board2 = new Board(getBoard("puzzle3x3-00.txt"));
+//        assertEquals(3, board2.convert2dTo1d(1, 2));
+//        assertEquals(2, board2.convert2dTo1d(1, 1));
+//
+//        assertEquals(4, board2.convert2dTo1d(2, 0));
+//        assertEquals(5, board2.convert2dTo1d(2, 1));
+//
+//        assertEquals(9, board2.convert2dTo1d(3, 2));
+//        assertEquals(8, board2.convert2dTo1d(3, 1));
+//
+//        Board board3 = new Board(getBoard("puzzle4x4-00.txt"));
+//
+//        assertEquals(1, board3.convert2dTo1d(1, 0));
+//        assertEquals(4, board3.convert2dTo1d(1, 3));
+//
+//        assertEquals(9, board3.convert2dTo1d(3, 0));
+//        assertEquals(12, board3.convert2dTo1d(3, 3));
+//
+//        assertEquals(5, board3.convert2dTo1d(2, 0));
+//        assertEquals(6, board3.convert2dTo1d(2, 1));
+//        assertEquals(7, board3.convert2dTo1d(2, 2));
+//        assertEquals(8, board3.convert2dTo1d(2, 3));
+//
+//
+//        assertEquals(13, board3.convert2dTo1d(4, 0));
+//        assertEquals(14, board3.convert2dTo1d(4, 1));
+//        assertEquals(15, board3.convert2dTo1d(4, 2));
+//        assertEquals(16, board3.convert2dTo1d(4, 3));
+//    }
     @Test
     public void testNeighbours() {
         Board board = new Board(getBoard("puzzle01.txt"));

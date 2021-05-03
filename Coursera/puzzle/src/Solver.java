@@ -1,67 +1,64 @@
 import edu.princeton.cs.algs4.MinPQ;
-import edu.princeton.cs.algs4.Queue;
+import edu.princeton.cs.algs4.Stack;
 
 import java.util.Comparator;
 
 public class Solver {
-    private int moves;
-    private Queue<Board> queue = new Queue<>();
+    private int finalMoves;
+    private Stack<Board> queue = new Stack<>();
     private boolean isSolvable = true;
-    MinPQ<Board> pqTwin = new MinPQ<>(new ByManhattanMoves());
 
     public Solver(Board initial) {
         if (initial == null) {
             throw new IllegalArgumentException();
         }
-        moves = helper(initial);
+        helper(initial);
     }
 
-    private int helper(Board initial) {
-        MinPQ<Board> pq = new MinPQ<>(new ByManhattanMoves());
-        pq.insert(initial);
-        int moves = 0;
-        Board previous = null;
-
+    private void helper(Board initial) {
+        MinPQ<SearchNode> pq = new MinPQ<>(new ByManhattanMoves());
+        pq.insert(new SearchNode(initial, null, 0));
         //TWIN
-        pqTwin.insert(initial.twin());
-        Board prevTwin = null;
+        MinPQ<SearchNode> pqTwin = new MinPQ<>(new ByManhattanMoves());
+        pqTwin.insert(new SearchNode(initial.twin(), null, 0));
 
         while (!pq.isEmpty() && isSolvable) {
-            Board current = pq.delMin();
-            queue.enqueue(current);
-            if (current.isGoal()) {
+            SearchNode current = pq.delMin();
+            SearchNode parallel = pqTwin.delMin();
+
+            if (current.board.isGoal()) {
+                finalMoves = current.moves;
+                backTracking(current);
                 break;
             }
-            moves++;
-            System.out.println("moves " + moves);
-            for (Board b : current.neighbors()) {
-                if (!b.equals(previous)) {
-                    pq.insert(b);
-                }
-            }
-            previous = current;
 
-            //TODO maybe here
-            prevTwin = simulate(prevTwin);
-            if(prevTwin == null) {
-                // base case found
+            if (parallel.board.isGoal()) {
                 isSolvable = false;
+                finalMoves = -1;
+                queue = null;
             }
+
+            neighbours(current, pq);
+            neighbours(parallel, pqTwin);
         }
-        return moves;
     }
 
-    private Board simulate(Board previous) {
-        Board current = pqTwin.delMin();
-        if (current.isGoal()) {
-            return null;
+    private void backTracking(SearchNode current) {
+        while (current.previous != null) {
+            queue.push(current.board);
+            current = current.previous;
         }
-        for (Board b : current.neighbors()) {
-            if (!b.equals(previous)) {
-                pqTwin.insert(b);
+        queue.push(current.board);
+    }
+
+    private void neighbours(SearchNode searchNode, MinPQ<SearchNode> pq) {
+        searchNode.moves = searchNode.moves + 1;
+        for (Board neighbour : searchNode.board.neighbors()) {
+            if (searchNode.previous == null || !neighbour.equals(searchNode.previous.board)) {
+                SearchNode newSN = new SearchNode(neighbour, searchNode, searchNode.moves);
+                pq.insert(newSN);
             }
         }
-        return current;
     }
 
     public boolean isSolvable() {
@@ -69,34 +66,44 @@ public class Solver {
     }
 
     public int moves() {
-        return moves;
+        return finalMoves;
     }
 
     public Iterable<Board> solution() {
         return queue;
     }
 
-    private class ByManhattanMoves implements Comparator<Board> {
+    private class ByManhattanMoves implements Comparator<SearchNode> {
+
         @Override
-        public int compare(Board o1, Board o2) {
-            if (o1.manhattan() == o2.manhattan()) {
-                if(o1.hamming() < o1.hamming()) {
+        public int compare(SearchNode o1, SearchNode o2) {
+            int movesO1 = o1.board.manhattan() + o1.moves;
+            int movesO2 = o2.board.manhattan() + o2.moves;
+            if (movesO1 == movesO2) {
+                if (o1.board.hamming() < o1.board.hamming()) {
                     return -1;
-                } else if(o1.hamming() > o1.hamming()) {
+                } else if (o1.board.hamming() > o1.board.hamming()) {
                     return 1;
                 } else {
                     return 0;
                 }
-            } else if (o1.manhattan() < o2.manhattan()) {
+            } else if (movesO1 < movesO2) {
                 return -1;
             } else {
                 return 1;
             }
         }
     }
+
     private class SearchNode {
-        private int moves = 0;
-        private Board initialBoard;
-        private Board previous;
+        private int moves;
+        private Board board;
+        private SearchNode previous;
+
+        public SearchNode(Board board, SearchNode previous, int moves) {
+            this.board = board;
+            this.previous = previous;
+            this.moves = moves;
+        }
     }
 }

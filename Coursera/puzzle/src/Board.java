@@ -203,14 +203,12 @@ public final class Board {
         return board;
     }
 
-    //TODO private
-    public int convert2dTo1d(int i, int j) {
+    private int convert2dTo1d(int i, int j) {
         // n is the leaps, math sequence and series
         return 1 + n * (i - 1) + j;
     }
 
-    //TODO private
-    public int[] convert1dTo2d(int num) {
+    private int[] convert1dTo2d(int num) {
         int mod = num % n;
         // + 1 because row starts from 1
         int i = mod == 0 ? (num / n) : (num / n) + 1;
