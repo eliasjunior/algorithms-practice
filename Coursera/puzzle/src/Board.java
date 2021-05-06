@@ -1,7 +1,7 @@
 import edu.princeton.cs.algs4.Stack;
 
 public final class Board {
-    private int[][] copy;
+    private int[][] tilesCopy;
     private int n;
     private int drManhattan = -1;
     private int thor = -1;
@@ -9,14 +9,14 @@ public final class Board {
 
     // create a board from an n-by-n array of tiles,
     // where tiles[row][col] = tile at (row, col)
-    public Board(int[][] tiles) {
+    public Board(final int[][] tiles) {
         if (tiles.length < 2 && tiles.length < 128 && tiles != null) {
             throw new IllegalArgumentException();
         }
-        this.copy = new int[tiles.length + 1][tiles.length];
+        this.tilesCopy = new int[tiles.length + 1][tiles.length];
         for (int i = 1; i <= tiles.length; i++) {
             for (int j = 0; j < tiles.length; j++) {
-                copy[i][j] = tiles[i - 1][j];
+                tilesCopy[i][j] = tiles[i - 1][j];
             }
         }
         this.n = tiles.length;
@@ -29,7 +29,7 @@ public final class Board {
         s.append(n + "\n");
         for (int i = 1; i < n + 1; i++) {
             for (int j = 0; j < n; j++) {
-                s.append(String.format("%2d ", copy[i][j]));
+                s.append(String.format("%2d ", tilesCopy[i][j]));
             }
             s.append("\n");
         }
@@ -47,7 +47,7 @@ public final class Board {
             int count = 0;
             for (int i = 1; i < n + 1; i++) {
                 for (int j = 0; j < n; j++) {
-                    int value = copy[i][j];
+                    int value = tilesCopy[i][j];
                     int converted = convert2dTo1d(i, j);
                     if (value != 0 && converted != value) {
                         count++;
@@ -65,9 +65,9 @@ public final class Board {
             int count = 0;
             for (int i = 1; i < n + 1; i++) {
                 for (int j = 0; j < n; j++) {
-                    int value = copy[i][j];
-                    int converted = convert2dTo1d(i, j);
-                    if (value != 0 && converted != value) {
+                    int value = tilesCopy[i][j];
+                    int oneDimensionValue = convert2dTo1d(i, j);
+                    if (value != 0 && oneDimensionValue != value) {
                         int[] cord = convert1dTo2d(value);
                         int row = cord[0];
                         int col = cord[1];
@@ -93,14 +93,14 @@ public final class Board {
         if (y == null) return false;
         if (y.getClass() != this.getClass()) return false;
         Board other = (Board) y;
-        int[][] otherTiles = other.copy;
+        int[][] otherTiles = other.tilesCopy;
         if (other.n != this.n) {
             return false;
         }
 
         for (int i = 1; i < n + 1; i++) {
             for (int j = 0; j < n; j++) {
-                int value = copy[i][j];
+                int value = tilesCopy[i][j];
                 int otherValue = otherTiles[i][j];
 
                 if (value != otherValue) {
@@ -222,7 +222,7 @@ public final class Board {
         int[][] original = new int[n][n];
         for (int row = 1; row < n + 1; row++) {
             for (int col = 0; col < n; col++) {
-                original[row - 1][col] = copy[row][col];
+                original[row - 1][col] = tilesCopy[row][col];
             }
         }
         return original;
