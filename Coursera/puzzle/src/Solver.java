@@ -7,6 +7,7 @@ public class Solver {
     private int finalMoves;
     private Stack<Board> queue = new Stack<>();
     private boolean isSolvable = true;
+    private int priority;
 
     public Solver(Board initial) {
         if (initial == null) {
@@ -24,6 +25,7 @@ public class Solver {
 
         while (!pq.isEmpty() && isSolvable) {
             SearchNode current = pq.delMin();
+            priority = current.board.manhattan();
             SearchNode parallel = pqTwin.delMin();
 
             if (current.board.isGoal()) {
@@ -37,7 +39,6 @@ public class Solver {
                 finalMoves = -1;
                 queue = null;
             }
-
             neighbours(current, pq);
             neighbours(parallel, pqTwin);
         }
@@ -54,6 +55,7 @@ public class Solver {
     private void neighbours(SearchNode searchNode, MinPQ<SearchNode> pq) {
         searchNode.moves = searchNode.moves + 1;
         for (Board neighbour : searchNode.board.neighbors()) {
+
             if (searchNode.previous == null || !neighbour.equals(searchNode.previous.board)) {
                 SearchNode newSN = new SearchNode(neighbour, searchNode, searchNode.moves);
                 pq.insert(newSN);
@@ -74,7 +76,6 @@ public class Solver {
     }
 
     private class ByManhattanMoves implements Comparator<SearchNode> {
-
         @Override
         public int compare(SearchNode o1, SearchNode o2) {
             int movesO1 = o1.board.manhattan() + o1.moves;
