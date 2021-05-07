@@ -6,7 +6,6 @@ public final class Board {
     private int drManhattan = -1;
     private int thor = -1;
 
-
     // create a board from an n-by-n array of tiles,
     // where tiles[row][col] = tile at (row, col)
     public Board(final int[][] tiles) {
