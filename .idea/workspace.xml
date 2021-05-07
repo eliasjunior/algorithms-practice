@@ -2,36 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c38e6ee9-8f72-45b0-8c8b-172efc070ba6" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Coursera/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Coursera/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Coursera/collinear-points/src/BruteCollinearPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/Coursera/collinear-points/src/BruteCollinearPoints.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Coursera/collinear-points/src/BruteCollinearPointsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Coursera/collinear-points/src/BruteCollinearPointsTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Coursera/collinear-points/src/FastCollinearPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/Coursera/collinear-points/src/FastCollinearPoints.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Coursera/collinear-points/src/FastCollinearPointsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Coursera/collinear-points/src/FastCollinearPointsTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Coursera/collinear-points/src/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/Coursera/collinear-points/src/Point.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Coursera/collinear-points/src/PointTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Coursera/collinear-points/src/PointTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Coursera/collinear-points/src/collinear/draft.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Coursera/collinear-points/src/collinear/draft.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/allsublist.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backup.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/box.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/composition.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dicesSum.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dom.manipulation.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/getDifferenceOfTwoDates.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/indent.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/myDatePicker.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/quicktest.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/teams.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/temp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-code.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/transverseDOM.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zig.zag.conversation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Coursera/puzzle/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/Coursera/puzzle/src/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Coursera/puzzle/src/Solver.java" beforeDir="false" afterPath="$PROJECT_DIR$/Coursera/puzzle/src/Solver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Coursera/puzzle/src/SolverTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Coursera/puzzle/src/SolverTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -537,6 +511,7 @@
       <option name="presentableId" value="Default" />
       <updated>1519483913512</updated>
       <workItem from="1618742082027" duration="114000" />
+      <workItem from="1621011795966" duration="881000" />
     </task>
     <servers />
   </component>
@@ -618,9 +593,6 @@
     <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
       <collection />
     </option>
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/hspot/hubspot/invitation.service.js">

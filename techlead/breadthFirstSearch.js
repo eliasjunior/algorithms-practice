@@ -21,9 +21,9 @@ let currentColorCounter;
 init()
 
 function init() {
-    //tranverse the matrix
-    // validation here, edge cases in the input
-    findMaxHelper()
+  //transverse the matrix
+  // validation here, edge cases in the input
+  findMaxHelper();
 }
 function findMaxHelper() {
     for (let row = 0; row < matrix.length; row++) {
@@ -32,7 +32,7 @@ function findMaxHelper() {
             // for ex: when to get back what would do it, like converting etc
             stack.push(`${row}${col}`)
             currentColorCounter = 1;
-            DeapthFirstSearch();
+            DepthFirstSearch();
         }
     }
 
@@ -40,7 +40,7 @@ function findMaxHelper() {
         console.log(key + ' = ' + value);
     }
 }
-function DeapthFirstSearch() {
+function DepthFirstSearch() {
     while (stack.length > 0) {
         let keyIndex = stack.pop()
 
@@ -56,12 +56,10 @@ function DeapthFirstSearch() {
 
         neighbours.forEach(neighbour => {
             if (!visited.has(neighbour) && isColor([neighbour.split(''), [row, col]])) {
-                // const [row_, col_ ] = neighbo.split('')
-                // DeapthFirstSearch(index[0], index[1], index[indexes[0]][index[1]])
                 stack.push(neighbour)
                 //TODO: I think this is not here
                 currentColorCounter = currentColorCounter + 1;
-                console.log(`neighbo=${neighbour}`)
+                console.log(`neighbor=${neighbour}`)
                 console.log(`currentColorCounter=${currentColorCounter}`)
             }
         })
