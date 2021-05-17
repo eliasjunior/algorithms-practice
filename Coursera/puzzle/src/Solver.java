@@ -79,13 +79,9 @@ public class Solver {
             int movesO1 = o1.priority + o1.moves;
             int movesO2 = o2.priority + o2.moves;
             if (movesO1 == movesO2) {
-                if (o1.board.hamming() < o1.board.hamming()) {
-                    return -1;
-                } else if (o1.board.hamming() > o1.board.hamming()) {
-                    return 1;
-                } else {
-                    return 0;
-                }
+                int thor1 = o1.board.hamming();
+                int thor2 = o2.board.hamming();
+                return Integer.compare(thor1, thor2);
             } else if (movesO1 < movesO2) {
                 return -1;
             } else {

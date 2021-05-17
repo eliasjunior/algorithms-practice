@@ -1,4 +1,3 @@
-import edu.princeton.cs.algs4.StdOut;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

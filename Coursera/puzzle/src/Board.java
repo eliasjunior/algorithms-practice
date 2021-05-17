@@ -1,21 +1,21 @@
 import edu.princeton.cs.algs4.Stack;
 
 public final class Board {
-    private int[][] tilesCopy;
-    private int n;
+    private final short[][] tilesCopy;
+    private final int n;
     private int drManhattan = -1;
     private int thor = -1;
 
     // create a board from an n-by-n array of tiles,
     // where tiles[row][col] = tile at (row, col)
     public Board(final int[][] tiles) {
-        if (tiles.length < 2 && tiles.length < 128 && tiles != null) {
+        if (tiles.length < 2 || tiles.length > 128) {
             throw new IllegalArgumentException();
         }
-        this.tilesCopy = new int[tiles.length][tiles.length];
+        this.tilesCopy = new short[tiles.length][tiles.length];
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles.length; j++) {
-                tilesCopy[i][j] = tiles[i][j];
+                tilesCopy[i][j] = (short) tiles[i][j];
             }
         }
         this.n = tiles.length;
@@ -26,7 +26,7 @@ public final class Board {
     // string representation of this board
     public String toString() {
         StringBuilder s = new StringBuilder();
-        s.append(n + "\n");
+        s.append(n).append("\n");
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 s.append(String.format("%2d ", tilesCopy[i][j]));
@@ -62,15 +62,14 @@ public final class Board {
         if (y == null) return false;
         if (y.getClass() != this.getClass()) return false;
         Board other = (Board) y;
-        int[][] otherTiles = other.tilesCopy;
         if (other.n != this.n) {
             return false;
         }
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                int value = tilesCopy[i][j];
-                int otherValue = otherTiles[i][j];
+                int value = this.tilesCopy[i][j];
+                int otherValue = other.tilesCopy[i][j];
 
                 if (value != otherValue) {
                     return false;

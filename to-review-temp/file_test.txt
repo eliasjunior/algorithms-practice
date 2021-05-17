@@ -1,6 +1,0 @@
-this is a test file 
-Node read this file for me
-angular 2 its a powerfull javascript platform 
-Why is platform ?
-Because is does not only run in the brower, its not attached to the dom,
-like angular 1 was.
