@@ -8,12 +8,10 @@ class MergeIntervals {
     }
 
     public int[][] merge(int[][] intervals) {
-        // check many intersation
+        // check many intersection
         if(intervals.length == 1) {
             return intervals;
         }
-
-        //Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
         Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
 
         LinkedList<int[]> stack = new LinkedList<>();
