@@ -17,6 +17,9 @@ public class Examples {
     }
 
     public static void sortingObjects( List<List<Integer>> objMatrix) {
+        // Object SIMPLE List
+        List<Integer> myList = new ArrayList<>((Arrays.asList(5, 1, 2)));
+        Collections.sort(myList);
 
         //COMPARING the first POS of the row/col, its a MATRIX!
         Collections.sort(objMatrix, (a, b) -> Integer.compare(a.get(0), b.get(0)));

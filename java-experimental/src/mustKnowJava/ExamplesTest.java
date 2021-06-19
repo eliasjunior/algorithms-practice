@@ -15,15 +15,10 @@ class ExamplesTest {
     void sortingPrimitives() {
         int [][] matrix = new int[][]{{6,2}, {1,5}};
         Examples.sortingPrimitives(matrix);
-
-
     }
 
     @Test
     void sortingObjects() {
-        // Object Simple List
-        List<Integer> myList = new ArrayList<>((Arrays.asList(5, 1, 2)));
-        Collections.sort(myList);
 
         List<Integer> row1 = new ArrayList<>((Arrays.asList(5, 1)));
         List<Integer> row2 = new ArrayList<>((Arrays.asList(3, 8)));
