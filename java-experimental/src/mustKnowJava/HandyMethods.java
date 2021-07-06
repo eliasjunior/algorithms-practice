@@ -1,9 +1,14 @@
+package mustKnowJava;
+
+import org.junit.jupiter.api.Test;
+
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class HandyMethods {
 
     public static void main(String[] args) {
+
     }
 
     void deque() {
@@ -35,6 +40,21 @@ public class HandyMethods {
         System.out.println("Deque after removing "
                 + "first and last: "
                 + deque);
+    }
+
+    @Test
+    void priorityQueue() {
+        Queue<Integer> queue = new PriorityQueue<>();
+        queue.add(10);
+        queue.add(20);
+        queue.add(5);
+        queue.add(-3);
+        queue.add(25);
+
+        System.out.println( queue.peek());
+        System.out.println(queue.poll());
+        System.out.println(queue.poll());
+        System.out.println(queue.poll());
     }
 
     void concurrentMap() {

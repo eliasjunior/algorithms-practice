@@ -1,6 +1,6 @@
-public class removeDuplicatesInplace {
+public class RemoveDuplicatesInplace {
     public static void main(String[] args) {
-        removeDuplicatesInplace arrayIntersection = new removeDuplicatesInplace();
+        RemoveDuplicatesInplace arrayIntersection = new RemoveDuplicatesInplace();
         int [] arr = new int[]{1, 1,2};
        // int [] arr = new int[]{0,0,1,1,1,2,2,3,3,4};
         int res = arrayIntersection.removeDuplicates(arr);

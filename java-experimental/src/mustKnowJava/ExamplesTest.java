@@ -59,16 +59,69 @@ class ExamplesTest {
         assertEquals(2, map.get(2));
     }
 
+    @Test
+    void testReverseString() {
+        assertEquals("dcba", Examples.reverseStr("abcd"));
+    }
+
+    @Test
+    void testSortArrDesc() {
+        assertArrayEquals(new int[]{4, 3,2,1}, Examples.sortArrayDesc(new int[]{1, 2, 3, 4}));
+    }
+
 
     @Test
     void justRUn() {
+        class ListNode {
+            int val;
+            ListNode next;
 
-        String [] strs = new String[]{"biba", "alias", "wido", "farmer"};
+            public ListNode(int v) {
+               val = v;
+            }
+        }
+        class Solution {
+            public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+                ListNode t1 = l1;
+                ListNode t2 = l2;
+                ListNode head = new ListNode(0);
+                ListNode result = new ListNode(0);
+                head.next = result;
 
-        Arrays.sort(strs);
-        String prefix = strs[0];
-        System.out.println( strs[1].indexOf(prefix));
+                while(result != null) {
+                    while(t1 != null && t2 != null && t1.val < t2.val || t1.val == t2.val) {
+                        result.next = new ListNode(t1.val) ;
+                        result.next.next = new ListNode(t2.val);
+                        t1 = t1.next;
+                        t2 = t2.next;
+                        result = result.next.next;
+                    }
+                    while(t1 != null && t2 != null && t1.val > t2.val) {
+                        result.next = new ListNode(t2.val) ;
+                        result.next.next = new ListNode(t1.val) ;
+                        t1 = t1.next;
+                        t2 = t2.next;
+                        result = result.next.next;
+                    }
+
+                }
+
+                if(t1 == null) {
+                    result.next = t2;
+                } else if(t2 == null){
+                    result.next = t1;
+                }
+
+                return head.next.next;
+            }
+        }
+
     }
+
+
+
+
+
 
 
 /*

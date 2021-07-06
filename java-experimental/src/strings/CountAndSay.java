@@ -23,7 +23,6 @@ public class CountAndSay {
         }
         return sb.toString();
     }
-
     public static void main(String[] args) {
         System.out.println(new CountAndSay().countAndSay(4));
     }
