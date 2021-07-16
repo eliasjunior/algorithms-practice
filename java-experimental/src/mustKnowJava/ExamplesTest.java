@@ -10,7 +10,7 @@ class ExamplesTest {
 
     @Test
     void sortingPrimitives() {
-        int [][] matrix = new int[][]{{6,2}, {1,5}};
+        int [][] matrix = new int[][]{{6,2, 5, 1, 4}, {9,5, 1, 2, 3}};
         Examples.sortingPrimitives(matrix);
     }
 

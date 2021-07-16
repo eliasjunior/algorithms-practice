@@ -1,53 +1,63 @@
 package ING;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class Dice {
-    // Dice movements
-    // 1 and 6, 2 and 5, 3 and 4;
-    public int solution(int[] A) {
-        Map<Integer, Integer> oppositeMap = new HashMap<>();
+    Map<Integer, Integer> oppositeMap;
+    Dice() {
+        oppositeMap = new HashMap<>();
         oppositeMap.put(1, 6);
         oppositeMap.put(6, 1);
         oppositeMap.put(2, 5);
         oppositeMap.put(5, 2);
         oppositeMap.put(3, 4);
         oppositeMap.put(4, 3);
+    }
+    public int solution(int[] A) {
+        if (A == null || A.length == 0) {
+            return 0;
+        }
+        Map<Integer, Integer> freqs = new HashMap<>();
+        for (Integer n : A) {
+            freqs.put(n, freqs.getOrDefault(n, 0) + 1);
+        }
 
         int min = Integer.MAX_VALUE;
-        for (int i = 0; i < A.length; i++) {
-            int cur = A[i];
-            int count = 0;
-            for (int j = 0; j < A.length; j++) {
-                if (i != j) {
-                    int myPair = A[j];
-                    Integer opposite = oppositeMap.get(cur);
-                    if (opposite == myPair) {
-                        count = count + 2;
-                    } else if(myPair != cur) {
-                        count = count + 1;
-                    }
-                }
+        for (Map.Entry<Integer, Integer> entry : freqs.entrySet()) {
+            Integer key = entry.getKey();
+            Integer freq = entry.getValue();
+            int minMoveList = A.length;
+
+            // sub size - freq
+            int moves = minMoveList - freq;
+            // 6
+            // always bring someone
+            Integer opposite = oppositeMap.get(key);
+
+            // from the freqs is my Opp pair there ?
+            Integer oppFreq = freqs.get(opposite);
+
+            if (oppFreq != null) {
+                // replace 1 move by 2
+                moves = moves - oppFreq;
+                moves = oppFreq * 2 + moves;
             }
-            min = Math.min(min, count);
+            min = Math.min(min, moves);
         }
         return min;
     }
 
-    public static void main(String[] args) {
-        display(new int[]{1, 2, 3});
-        display(new int[]{1, 1, 6});
-        display(new int[]{1, 6, 2 , 3});
-        display(new int[]{1,2,3,4,5});
-    }
-
-    private static void display(int [] arr) {
+    @Test
+    public void testAll() {
         Dice dice = new Dice();
-        System.out.print("Input Dices [");
-        for (int n:arr) {
-            System.out.print(n + " ");
-        }
-        System.out.println("], min moves " + dice.solution(arr));
+        Assertions.assertEquals(2, dice.solution(new int[]{1, 2, 3}));
+        Assertions.assertEquals(2, dice.solution(new int[]{1, 1, 6}));
+        Assertions.assertEquals(3, dice.solution(new int[]{1, 6, 2, 3}));
+        Assertions.assertEquals(4, dice.solution(new int[]{1, 2, 3, 4, 5}));
     }
 }
+

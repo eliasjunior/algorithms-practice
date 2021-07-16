@@ -10,9 +10,9 @@ public class Examples {
     public static void sortingPrimitives(int [][] matrix) {
         System.out.println("Primitive Matrix,COMPARING the first POS of the row/col, its a MATRIX!");
         //1
-        Arrays.sort(matrix, (a, b) -> Integer.compare(a[0], b[0]));
+        Arrays.sort(matrix, (a, b) -> Integer.compare(b[0], a[0]));
         //2
-        Arrays.sort(matrix, Comparator.comparingInt(a -> a[0]));
+      //  Arrays.sort(matrix, Comparator.comparingInt(a -> a[0]));
 
         //Testing, should print 1 and 6
         for (int i = 0; i < matrix.length; i++) {
@@ -68,8 +68,8 @@ public class Examples {
             mapFreqs.put(key, val + 1);
         }
         StringBuilder sb = new StringBuilder();
-        for(Map.Entry entry : mapFreqs.entrySet()) {
-           sb.append(entry.getKey().toString() + entry.getValue().toString());
+        for(Map.Entry<Integer, Integer> entry : mapFreqs.entrySet()) {
+           sb.append(entry.getKey() + entry.getValue());
         }
         return mapFreqs;
     }
